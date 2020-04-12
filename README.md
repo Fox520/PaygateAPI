@@ -21,4 +21,12 @@ BODY
     "order_info": # e.g. {'purchase_type': 'airtime', 'quantity': 10, ...}
 }
 
+RESPONSE
+{
+    "PAYGATE_ID": int,
+    "PAY_REQUEST_ID": String,
+    "REFERENCE": String, # Same as the one in POST reqeust
+    "CHECKSUM":String
+}
+
 ```
