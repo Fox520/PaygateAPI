@@ -31,19 +31,22 @@ class PaygateAPI(Resource):
             ref = request.args.get("reference")
             if ref is None:
                 return ""
+            ref = ref.replace("\n", "").replace('"', "")
+            print(ref)
+            print("Payment data is below")
+            print(payment_data)
+            print(payment_data.get(str(ref)))
             return jsonify(payment_data.get(str(ref)))
         elif action == "ref":
+            k = request.args.get("pay_request_id", "-1")
             # Returns the reference based on the pay request id given; -1 if not found
-            return pyi_to_ref.get(request.args.get("pay_request_id", "-1"))
+            return pyi_to_ref.get(str(k))
 
     def post(self, action):
         if action == "initiate":
             return jsonify(self.initiate_payment(request.get_json(force=True)))
 
     def initiate_payment(self, args):
-        global payment_data
-        global pyi_to_ref
-        global important_data
         # Ensure reference does not already exist
         if 1==1 or args["reference"] not in important_data:
             ref = args["reference"]
