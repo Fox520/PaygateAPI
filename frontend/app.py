@@ -48,7 +48,7 @@ def hello():
             "reference": ref
         }
         # Send request to our api
-        data = json.loads(requests.post(API_URL+"/initiate", json=req, headers={'Connection':'close'}).text)
+        data = json.loads(requests.post(API_URL+"/initiate", json=req).text)
         if data.get("error"):
             flash(data["error"], "warning")
             print(f"Error: {data['error']}")
@@ -71,11 +71,15 @@ def final():
     data = request.form
     result_desc = TRANSACTION_STATUS[data["TRANSACTION_STATUS"]]
     params1 = {"pay_request_id":data["PAY_REQUEST_ID"]}
-    reference = requests.get(API_URL+"/ref", params=params1, headers={'Connection':'close'}).text
+    reference = requests.get(API_URL+"/ref", params=params1).text
     params2 = {"reference": reference}
-    # TODO: This returns None; doing the request from postman or Python repl works tho
-    payment_data = json.loads(requests.get(API_URL+"/payment-data",params=params2, headers={'Connection':'close'}).text)
-    print(payment_data)
+    payment_data = json.loads(requests.get(API_URL+"/payment-data",params=params2).text)
+
+    # Check if transaction was successful
+    if data["TRANSACTION_STATUS"] == "1":
+        # contact api to fulfill transaction
+        params3 = {"reference": reference}
+        result = json.loads(requests.get(API_URL+"/complete-purchase",params=params3).text)
     return render_template("final.html", data=data, result_desc=result_desc, payment_data=payment_data)
 
 if __name__ == "__main__":
