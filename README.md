@@ -15,8 +15,8 @@ BODY
 {
     "ref": String, # Randomly string to identify the user
     "amount": String, #amount to charge; format: $5.99 is x100 therefore 599
-    "return_url": String,# After user completes/cancels payment
-    "email": args["email"],
+    "return_url": String, # After user completes/cancels payment
+    "email": String,
     "pay_method": "CC", # method of payment
     "order_info": # e.g. {'purchase_type': 'airtime', 'quantity': 10, ...}
 }
@@ -28,5 +28,14 @@ RESPONSE
     "REFERENCE": String, # Same as the one in POST reqeust
     "CHECKSUM":String
 }
+
+```
+### Redirect to Paygate
+```php
+// Example
+<form action="https://secure.paygate.co.za/payweb3/process.trans" method="POST" >
+    <input type="hidden" name="PAY_REQUEST_ID" value="23B785AE-C96C-32AF-4879-D2C9363DB6E8">
+    <input type="hidden" name="CHECKSUM" value="b41a77f83a275a849f23e30b4666e837">
+</form>
 
 ```
