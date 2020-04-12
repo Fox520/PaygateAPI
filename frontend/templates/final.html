@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block content%}
+<h3>Transaction results:</h3>
+<p>Transaction was {{ result_desc }}</p>
+<p>API returned output: {{ data }}</p>
+
+<h4>Below is the purchase order</h4>
+
+{% for k, v in payment_data.items() %}
+    <p>{{ k }}  </p> <p>    - {{ v }}</p>
+{% endfor %}
+
+
+{% endblock content %}

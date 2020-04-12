@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% block content%}
+<h1>Ping, an online payments solution</h1>
+<h3>Do your purchases online today!</h3>
+<div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+                <div class="alert alert-warning" role="alert">
+                {{ message }}
+              </div>
+          {% endfor %}
+        {% endif %}
+    {% endwith %}
+  </div>
+<div class="content-section">
+    <form method="POST" action="">
+        {{ forms.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Enter details</legend>
+            <div class="form-group">
+                {{ forms.package.label(class="form-control-label") }}
+                {{ forms.package(class="form-control form-control-lg") }}
+            </div>
+            <div class="form-group">
+                {{ forms.phone_number.label(class="form-control-label") }}
+                {{ forms.phone_number(class="form-control form-control-lg") }}
+            </div>
+            <div class="form-group">
+                {{ forms.quantity.label(class="form-control-label") }}
+                {{ forms.quantity(class="form-control form-control-lg") }}
+            </div>
+            <div class="form-group">
+                {{ forms.phone_name.label(class="form-control-label") }}
+                {{ forms.phone_name(class="form-control form-control-lg") }}
+            </div>
+            <div class="form-group">
+                {{ forms.pay_method.label(class="form-control-label") }}
+                {{ forms.pay_method(class="form-control form-control-lg") }}
+            </div>
+            <div class="form-group">
+                {{ forms.email.label(class="form-control-label") }}
+                {{ forms.email(class="form-control form-control-lg") }}
+            </div>
+        </fieldset>
+        <div class="form-group">
+            {{ forms.submit(class="btn btn-outline-info") }}
+        </div>
+    </form>
+    <br>
+</div>
+<div class="content-section">
+    <form action="https://secure.paygate.co.za/payweb3/process.trans" method="POST" >
+        <input type="hidden" name="PAY_REQUEST_ID" value="23B785AE-C96C-32AF-4879-D2C9363DB6E8">
+        <input type="hidden" name="CHECKSUM" value="b41a77f83a275a849f23e30b4666e837">
+    </form>
+</div>
+
+{% endblock content %}

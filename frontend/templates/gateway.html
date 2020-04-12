@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block content%}
+<h3>Click to proceed to payment gateway</h3>
+
+<form action="https://secure.paygate.co.za/payweb3/process.trans" method="POST" >
+    <input type="hidden" name="PAY_REQUEST_ID" value={{ a }}>
+    <input type="hidden" name="CHECKSUM" value={{ b }}>
+    <input class="btn btn-success" type="submit" value="Continue">
+</form>
+
+
+{% endblock content %}
