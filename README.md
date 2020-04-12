@@ -3,6 +3,6 @@
 ## Running the api
 ```
 python3 -m pip install flask flask_restful requests
-cd api
+cd backend
 python3 app.py
 ```
