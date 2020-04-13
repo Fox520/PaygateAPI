@@ -55,7 +55,7 @@ def hello():
         data = json.loads(requests.post(API_URL+"/initiate", json=req).text)
         if data.get("error"):
             flash(data["error"], "warning")
-            print(f"Error: {data['error']}")
+            print(data['error'])
             # Remove cookie
             resp.set_cookie('reference', '', expires=0)
             return resp

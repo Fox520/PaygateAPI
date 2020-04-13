@@ -64,7 +64,7 @@ class PaygateAPI(Resource):
                 "CURRENCY": "ZAR",  # args["currency"],
                 "RETURN_URL": args["return_url"],
                 "TRANSACTION_DATE": utc_now(),
-                "LOCALE": args["locale"],
+                "LOCALE": "en-za", #args["locale"],
                 "COUNTRY": "ZAF",  # args["country"],
                 "EMAIL": args["email"],
                 "PAY_METHOD": "CC",  # args["pay_method"]
