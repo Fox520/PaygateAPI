@@ -9,7 +9,8 @@ app = Flask(__name__)
 
 app.config["SECRET_KEY"] = "1a5727507bf3f1bcd3d8a213ff453de1"
 
-API_URL = "http://localhost:5001/api"
+API_URL = "http://fox520.duckdns.org:5001/api"
+RETURN_URL = "http://fox520.duckdns.org:5000/final"
 PAYGATE_REDIRECT_URL = "https://secure.paygate.co.za/payweb3/process.trans"
 TRANSACTION_STATUS = {
     "0": "Not Done",
@@ -36,13 +37,16 @@ def hello():
         resp.set_cookie("reference", ref)
         req = {
             "package": request.form["package"],
-            "phone_number": request.form["phone_number"],
-            "phone_name": request.form["phone_name"],
+            "order_info": {
+                "phone_number": request.form["phone_number"],
+                "airtime_amount": request.form["airtime_amount"]
+            },
+            
             "pay_method": request.form["pay_method"],
             "email": request.form["email"],
             "amount": str(float("5.50")*100),
             "currency": "NAD",
-            "return_url": "http://localhost:5000/final",
+            "return_url": RETURN_URL,
             "locale": "en",
             "country": "NAM",
             "reference": ref
@@ -83,4 +87,4 @@ def final():
     return render_template("final.html", data=data, result_desc=result_desc, payment_data=payment_data)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0")

@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content%}
-<h1>Ping, an online payments solution</h1>
 <h3>Do your purchases online today!</h3>
+<br>
 <div>
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
@@ -27,12 +27,8 @@
                 {{ forms.phone_number(class="form-control form-control-lg") }}
             </div>
             <div class="form-group">
-                {{ forms.quantity.label(class="form-control-label") }}
-                {{ forms.quantity(class="form-control form-control-lg") }}
-            </div>
-            <div class="form-group">
-                {{ forms.phone_name.label(class="form-control-label") }}
-                {{ forms.phone_name(class="form-control form-control-lg") }}
+                {{ forms.airtime_amount.label(class="form-control-label") }}
+                {{ forms.airtime_amount(class="form-control form-control-lg") }}
             </div>
             <div class="form-group">
                 {{ forms.pay_method.label(class="form-control-label") }}

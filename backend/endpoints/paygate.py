@@ -50,11 +50,12 @@ class PaygateAPI(Resource):
 
     def post(self, action):
         if action == "initiate":
+            print(request.headers)
             return jsonify(self.initiate_payment(request.get_json(force=True)))
 
     def initiate_payment(self, args):
         # Ensure reference does not already exist
-        if 1 == 1 or args["reference"] not in important_data:
+        if args["reference"] not in important_data:
             ref = args["reference"]
             api_request = {
                 "PAYGATE_ID": str(PAYGATE_ID),
@@ -83,7 +84,6 @@ class PaygateAPI(Resource):
                 pyi_to_ref[result[1]["PAY_REQUEST_ID"]] = args.pop("reference")
                 # Store posted data
                 payment_data[ref] = args
-                print(payment_data)
                 # print(important_data)
                 # print(pyi_to_ref)
                 # print("\n")

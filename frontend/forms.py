@@ -10,6 +10,16 @@ PACKAGE_CHOICES = [
     ("handset", "Handset"),
     ("prepayments", "Prepayments"),
 ]
+
+AIRTIME_CHOICES = [
+    ("5", "5 NAD"),
+    ("10", "10 NAD"),
+    ("20", "20 NAD"),
+    ("30", "30 NAD"),
+    ("40", "40 NAD"),
+    ("50", "50 NAD"),
+]
+
 PAYMENT_METHOD_CHOICES = [
     ("CC", "Credit Card"),
     ("DC", "Debit Card"),
@@ -29,6 +39,8 @@ class DetailsForm(FlaskForm):
     pay_method = SelectField(
         u"Payment method", choices=PAYMENT_METHOD_CHOICES, validators=[InputRequired()]
     )
-    quantity = StringField("Quantity", validators=[InputRequired()])
+    airtime_amount = SelectField(
+        u"Amount", choices=AIRTIME_CHOICES, validators=[InputRequired()]
+    )
     email = StringField("E-mail address", validators=[InputRequired(), Email()])
     submit = SubmitField("Proceed to checkout")
