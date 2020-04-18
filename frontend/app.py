@@ -44,7 +44,7 @@ def hello():
             
             "pay_method": request.form["pay_method"],
             "email": request.form["email"],
-            "amount": str(float("5.50")*100),
+            "amount": str(float(request.form["airtime_amount"])*100),
             "currency": "NAD",
             "return_url": RETURN_URL,
             "locale": "en",

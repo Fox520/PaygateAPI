@@ -109,10 +109,20 @@ def format_response(r):
         return (False, r.split("=")[1])
     return (True, fin)
 
-
 def get_checksum(data: dict, key: str):
-    data = "".join([str(x) for x in data.values()]) + key
-    return hashlib.md5(data.encode("utf-8")).hexdigest()
+    s = ""
+    s += data["PAYGATE_ID"]
+    s += data["REFERENCE"]
+    s += data["AMOUNT"]
+    s += data["CURRENCY"]
+    s += data["RETURN_URL"]
+    s += data["TRANSACTION_DATE"]
+    s += data["LOCALE"]
+    s += data["COUNTRY"]
+    s += data["EMAIL"]
+    s += data["PAY_METHOD"]
+    s += key
+    return hashlib.md5(s.encode("utf-8")).hexdigest()
 
 
 def utc_now():
